@@ -4,7 +4,26 @@ import ExpanseList from "./expanse-tracker/components/ExpanseList";
 import ExpanseForm from "./expanse-tracker/components/ExpanseForm";
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [expanses, setExpanses] = useState([]);
+  const [expanses, setExpanses] = useState([
+    {
+      id: 1,
+      description: "Milk",
+      amount: 200,
+      category: "Utilities",
+    },
+    {
+      id: 2,
+      description: "Movie",
+      amount: 2000,
+      category: "Entertainment",
+    },
+    {
+      id: 3,
+      description: "Cheez",
+      amount: 200,
+      category: "Groceries",
+    },
+  ]);
 
   const visibleExpanses = selectedCategory
     ? expanses.filter((e) => e.category === selectedCategory)

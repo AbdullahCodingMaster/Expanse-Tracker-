@@ -1,8 +1,10 @@
 import categories from "../categories";
-import { z } from "zod";
+// import { z } from "zod";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import * as z from "zod";
 const schema = z.object({
   description: z
     .string()
@@ -79,7 +81,7 @@ const ExpanseForm = ({ onSubmit }: Props) => {
           <p className="text-danger">{errors.category.message}</p>
         )}
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-outline-primary">
         Submit
       </button>
     </form>
