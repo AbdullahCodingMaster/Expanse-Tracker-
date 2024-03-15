@@ -19,7 +19,7 @@ const App = () => {
     },
     {
       id: 3,
-      description: "Cheez",
+      description: "Cheese",
       amount: 200,
       category: "Groceries",
     },
