@@ -12,6 +12,7 @@ interface Props {
 
 const ExpanseList = ({ expanses, onDelete }: Props) => {
   if (expanses.length === 0) return null;
+
   return (
     <table className="table table-bordered">
       <thead>
@@ -39,7 +40,6 @@ const ExpanseList = ({ expanses, onDelete }: Props) => {
           </tr>
         ))}
       </tbody>
-
       <tfoot>
         <tr>
           <td>Total</td>

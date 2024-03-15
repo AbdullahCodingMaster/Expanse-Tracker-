@@ -2,6 +2,7 @@ import categories from "../categories";
 interface Props {
   onSelectCategory: (category: string) => void;
 }
+
 const ExpanseFilter = ({ onSelectCategory }: Props) => {
   return (
     <select

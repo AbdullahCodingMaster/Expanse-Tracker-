@@ -1,10 +1,8 @@
-import categories from "../categories";
-// import { z } from "zod";
-// import { useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import categories from "../categories";
+
 const schema = z.object({
   description: z
     .string()
@@ -24,6 +22,7 @@ type ExpanseFormData = z.infer<typeof schema>;
 interface Props {
   onSubmit: (data: ExpanseFormData) => void;
 }
+
 const ExpanseForm = ({ onSubmit }: Props) => {
   const {
     register,
@@ -31,6 +30,7 @@ const ExpanseForm = ({ onSubmit }: Props) => {
     reset,
     formState: { errors },
   } = useForm<ExpanseFormData>({ resolver: zodResolver(schema) });
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
@@ -38,50 +38,55 @@ const ExpanseForm = ({ onSubmit }: Props) => {
         reset();
       })}
     >
-      <div className="mb-3">
-        <label htmlFor="description" className="form-label">
-          Description
-        </label>
-        <input
-          {...register("description")}
-          id="description"
-          type="text"
-          className="form-control"
-        />
-        {errors.description && (
-          <p className="text-danger">{errors.description.message}</p>
-        )}
+      <div className="row g-3">
+        <div className="col-md-6">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <input
+            {...register("description")}
+            id="description"
+            type="text"
+            className="form-control"
+          />
+          {errors.description && (
+            <p className="text-danger">{errors.description.message}</p>
+          )}
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="amount" className="form-label">
+            Amount
+          </label>
+          <input
+            {...register("amount", { valueAsNumber: true })}
+            id="amount"
+            type="number"
+            className="form-control"
+          />
+          {errors.amount && (
+            <p className="text-danger">{errors.amount.message}</p>
+          )}
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="category" className="form-label">
+            Category
+          </label>
+          <select
+            {...register("category")}
+            id="category"
+            className="form-select"
+          >
+            <option value=""></option>
+            {categories.map((category) => (
+              <option key={category}>{category}</option>
+            ))}
+          </select>
+          {errors.category && (
+            <p className="text-danger">{errors.category.message}</p>
+          )}
+        </div>
       </div>
-      <div className="mb-3">
-        <label htmlFor="amount" className="form-label">
-          Amount
-        </label>
-        <input
-          {...register("amount", { valueAsNumber: true })}
-          id="amount"
-          type="number"
-          className="form-control"
-        />
-        {errors.amount && (
-          <p className="text-danger">{errors.amount.message}</p>
-        )}
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="category" className="form-label">
-          Category
-        </label>
-        <select {...register("category")} id="category" className="form-select">
-          <option value=""></option>
-          {categories.map((category) => (
-            <option key={category}>{category}</option>
-          ))}
-        </select>
-        {errors.category && (
-          <p className="text-danger">{errors.category.message}</p>
-        )}
-      </div>
-      <button type="submit" className="btn btn-outline-primary">
+      <button type="submit" className="btn btn-outline-primary mt-2">
         Submit
       </button>
     </form>
